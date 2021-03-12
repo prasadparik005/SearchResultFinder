@@ -1,0 +1,40 @@
+﻿@model SearchViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<form method ="post" data-ajax="true" data-ajax-url="/Home" data-ajax-method="post" data-ajax-complete="completed">
+    <table>
+        <tr>
+            <td><label for="Url">Url to search</label></td>
+            <td><input id="Url" name="Url" type="text" /></td>
+        </tr>
+        <tr>
+            <td><label for="Keywords">Keywords</label></td>
+            <td><input id="Keywords" name="Keywords" type="text" /></td>
+        </tr>
+        <tr>
+            <td><label for="SearchEngine">Select Search Engine</label></td>
+            <td>
+                <select id="SearchEngine" name="SearchEngine">
+                    <option value="Google" selected="selected">Google</option>
+                    <option value="Bing">Bing</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr><td><input type="submit" /></td></tr>
+    </table>
+</form>
+
+<p>Search Result: <span id="result"></span></p>
+
+@section scripts {
+    <script>
+        completed = function (response) {
+            console.log(response.responseJSON);
+            $("#result").html(response.responseJSON.data)
+        };
+    </script>
+}
